@@ -42,6 +42,12 @@ CREATE TABLE mis_files (
     INDEX(end)
 ) COMMENT ‘common field among other tables’;
 
+CREATE TABLE mis_file_tags(
+    file_id BIGINT UNSIGNED NOT NULL,
+    tag_id BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (file_id, tag_id)
+) COMMENT 'list of tags assigned to file';
+
 CREATE TABLE mis_people (
     file_id BIGINT UNSIGNED NOT NULL COMMENT ‘foreign key from files table’,
     population DOUBLE UNSIGNED NOT NULL,
@@ -59,5 +65,23 @@ CREATE TABLE mis_people (
     INDEX i_state(state),
     INDEX i_city(city),
     INDEX i_zip_code(zip_code)
+);
+
+CREATE TABLE mis_business_components (
+    file_id BIGINT UNSIGNED NOT NULL COMMENT ‘foreign key from files table’,
+    value_propositions TEXT,
+    PRIMARY KEY (file_id)
+);
+
+CREATE TABLE mis_external_environment (
+    file_id BIGINT UNSIGNED NOT NULL COMMENT ‘foreign key from files table’,
+    external_environment TEXT,
+    PRIMARY KEY (file_id)
+);
+
+CREATE TABLE mis_target_markets (
+    file_id BIGINT UNSIGNED NOT NULL COMMENT ‘foreign key from files table’,
+    target_market TEXT,
+    PRIMARY KEY (file_id)
 );
 
